@@ -62,13 +62,22 @@ public class test {
         // }
 
         
-        BigClock clock = new BigClock("clk");
-        PC pc = new PC("pc", "1x32", clock.getOutput(0));
+        // BigClock clock = new BigClock("clk");
+        // PC pc = new PC("pc", "1x32", clock.getOutput(0));
+        
+        // SignExtend se = new SignExtend("se", "16x32");
+        // se.addInput(Simulator.falseLogic);
+        // for(int i= 1; i< 16; i++){
+        //     se.addInput(Simulator.trueLogic);
+        // }
+        
 
+        //false logic is for write memory. we don't change memory in instruction memory so it should always be false
+        InstructionMemory ins = new InstructionMemory("ins", "1x32",Simulator.falseLogic);
 
-        Simulator.debugger.addTrackItem(clock,pc);
+        Simulator.debugger.addTrackItem(ins);
         Simulator.debugger.setDelay(0);
-        Simulator.circuit.startCircuit(5);
+        Simulator.circuit.startCircuit(3);
 
 
 
