@@ -48,21 +48,25 @@ public class test {
         // }
 
 
+        // BigClock clock = new BigClock("clk");
+        // RegFile regfile = new RegFile("regfile", "49x64", clock.getOutput(0), Simulator.trueLogic);
+        // for(int i= 0; i< 5; i++){
+        //     regfile.addInput(Simulator.falseLogic);
+        // }
+        // for(int i =0; i< 4; i++){
+        //     regfile.addInput(Simulator.falseLogic);
+        // }
+        // regfile.addInput(Simulator.trueLogic);
+        // for(int i = 0; i< 37; i++){
+        //      regfile.addInput(Simulator.falseLogic);
+        // }
+
+        
         BigClock clock = new BigClock("clk");
-        RegFile regfile = new RegFile("regfile", "49x64", clock.getOutput(0), Simulator.trueLogic);
-        for(int i= 0; i< 5; i++){
-            regfile.addInput(Simulator.falseLogic);
-        }
-        for(int i =0; i< 4; i++){
-            regfile.addInput(Simulator.falseLogic);
-        }
-        regfile.addInput(Simulator.trueLogic);
-        for(int i = 0; i< 37; i++){
-             regfile.addInput(Simulator.falseLogic);
-        }
+        PC pc = new PC("pc", "34x32", clock.getOutput(0), Simulator.trueLogic);
 
 
-        Simulator.debugger.addTrackItem(clock,regfile);
+        Simulator.debugger.addTrackItem(clock,pc);
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(3);
 
