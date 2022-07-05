@@ -5,6 +5,7 @@ import simulator.gates.combinational.And;
 import simulator.network.Link;
 import simulator.wrapper.Wrapper;
 import simulator.wrapper.wrappers.Decoder;
+import simulator.wrapper.wrappers.Multiplexer;
 
 /*
  * a register file
@@ -41,16 +42,30 @@ public class RegFile extends Wrapper {
             ands[i].addInput(decoder.getOutput(i));
             registers[i].setInput(1, ands[i].getOutput(0));
         }
-        // add read registers
-
-        /* 
-        for(int i = 0; i< 32; i++){
-            addOutput(registers[0].getOutput(i));
+        Multiplexer muxs1[] = new Multiplexer[32];
+        Multiplexer muxs2[] = new Multiplexer[32];
+        for(int i = 0; i < 32; i++){
+            muxs1[i] = new Multiplexer("1mux" + i, "37x1");
+            muxs2[i] = new Multiplexer("2mux" + i, "37x1");
+        }
+        for(int i =0; i<32; i++){
+            for(int j = 2; j < 7; j++){
+                muxs1[i].addInput(getInput(j));
+                muxs2[i].addInput(getInput(j + 5));
+            }
+        }
+        for(int i = 0; i < 32; i++){
+            for(int j = 0; j < 32; j++){
+                muxs1[i].addInput(registers[j].getOutput(i));
+                muxs2[i].addInput(registers[j].getOutput(i));
+            }
         }
         for(int i = 0; i< 32; i++){
-            addOutput(registers[1].getOutput(i));
+            addOutput(muxs1[i].getOutput(0));
         }
-        */
+        for(int i = 0; i< 32; i++){
+            addOutput(muxs2[i].getOutput(0));
+        }
         
     }
     

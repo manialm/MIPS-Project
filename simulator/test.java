@@ -1,5 +1,7 @@
 package simulator;
 
+import javax.security.auth.RefreshFailedException;
+
 import simulator.control.Simulator;
 import simulator.gates.combinational.Not;
 import simulator.gates.sequential.BigClock;
@@ -45,7 +47,22 @@ public class test {
         //     regfile.addInput(Simulator.falseLogic);
         // }
 
-        Simulator.debugger.addTrackItem();
+
+        BigClock clock = new BigClock("clk");
+        RegFile regfile = new RegFile("regfile", "49x64", clock.getOutput(0), Simulator.trueLogic);
+        for(int i= 0; i< 5; i++){
+            regfile.addInput(Simulator.falseLogic);
+        }
+        for(int i =0; i< 4; i++){
+            regfile.addInput(Simulator.falseLogic);
+        }
+        regfile.addInput(Simulator.trueLogic);
+        for(int i = 0; i< 37; i++){
+             regfile.addInput(Simulator.falseLogic);
+        }
+
+
+        Simulator.debugger.addTrackItem(clock,regfile);
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(3);
 
