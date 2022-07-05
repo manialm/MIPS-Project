@@ -1,10 +1,10 @@
 package simulator;
 
-import javax.security.auth.RefreshFailedException;
 
 import simulator.control.Simulator;
 import simulator.gates.combinational.Not;
 import simulator.gates.sequential.BigClock;
+import simulator.gates.sequential.Clock;
 import simulator.wrapper.wrappers.Adder;
 import simulator.wrapper.wrappers.DFlipFlop;
 import simulator.wrapper.wrappers.Decoder;
@@ -63,12 +63,12 @@ public class test {
 
         
         BigClock clock = new BigClock("clk");
-        PC pc = new PC("pc", "34x32", clock.getOutput(0), Simulator.trueLogic);
+        PC pc = new PC("pc", "1x32", clock.getOutput(0));
 
 
         Simulator.debugger.addTrackItem(clock,pc);
         Simulator.debugger.setDelay(0);
-        Simulator.circuit.startCircuit(3);
+        Simulator.circuit.startCircuit(5);
 
 
 
