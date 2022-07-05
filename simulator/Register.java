@@ -4,7 +4,6 @@ import simulator.control.Simulator;
 import simulator.gates.combinational.And;
 import simulator.gates.combinational.Not;
 import simulator.gates.combinational.Or;
-import simulator.gates.sequential.BigClock;
 import simulator.network.Link;
 import simulator.wrapper.Wrapper;
 import simulator.wrapper.wrappers.DFlipFlop;
@@ -12,7 +11,8 @@ import simulator.wrapper.wrappers.DFlipFlop;
 /*a data flip-flop
  * in:
  *   0 : clock signal 
- *   1 : load  signal*/
+ *   1 : load  signal
+ *   2 -> size : data*/
 
 public class Register extends Wrapper{
     static final int size = 32;
