@@ -51,6 +51,7 @@ public class RegFile extends Wrapper {
             addOutput(registers[1].getOutput(i));
         }
         */
+        
     }
     
 }
