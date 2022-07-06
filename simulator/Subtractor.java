@@ -21,13 +21,13 @@ public class Subtractor extends Wrapper{
             nots[i].addInput(getInput(i + 32));
             fadders[i] = new FullAdder("fadder", "3x2");
         }
-        fadders[0].addInput(getInput(0));
-        fadders[0].addInput(nots[0].getOutput(0));
-        fadders[0].addInput(Simulator.trueLogic);
-        for(int i= 1; i< 32; i++){
+        fadders[31].addInput(getInput(31));
+        fadders[31].addInput(nots[31].getOutput(0));
+        fadders[31].addInput(Simulator.trueLogic);
+        for(int i= 0; i< 31; i++){
             fadders[i].addInput(getInput(i));
             fadders[i].addInput(nots[i].getOutput(0));
-            fadders[i].addInput(fadders[i - 1].getOutput(0));
+            fadders[i].addInput(fadders[i + 1].getOutput(0));
         }
         for(int i =0; i< 32; i++){
             addOutput(fadders[i].getOutput(1));

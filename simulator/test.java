@@ -76,21 +76,22 @@ public class test {
         //InstructionMemory ins = new InstructionMemory("ins", "1x32",Simulator.falseLogic);
 
         
-        Subtractor sub = new Subtractor("sub", "64x32");
-        for(int i = 0; i< 29; i++){
-            sub.addInput(Simulator.falseLogic);
-        }
-        sub.addInput(Simulator.trueLogic);
-        sub.addInput(Simulator.falseLogic);
-        sub.addInput(Simulator.trueLogic);
+        // Subtractor sub = new Subtractor("sub", "64x32");
+        // for(int i = 0; i< 29; i++){
+        //     sub.addInput(Simulator.falseLogic);
+        // }
+        // sub.addInput(Simulator.trueLogic);
+        // sub.addInput(Simulator.falseLogic);
+        // sub.addInput(Simulator.trueLogic);
 
-        for(int i = 0; i< 30; i++){
-            sub.addInput(Simulator.falseLogic);
-        }
-        sub.addInput(Simulator.trueLogic);
-        sub.addInput(Simulator.falseLogic);
+        // for(int i = 0; i< 30; i++){
+        //     sub.addInput(Simulator.falseLogic);
+        // }
+        // sub.addInput(Simulator.trueLogic);
+        // sub.addInput(Simulator.falseLogic);
+        
 
-        Simulator.debugger.addTrackItem(sub);
+        Simulator.debugger.addTrackItem();
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(3);
 
