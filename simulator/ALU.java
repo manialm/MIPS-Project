@@ -2,6 +2,7 @@ package simulator;
 
 import simulator.gates.combinational.And;
 import simulator.gates.combinational.Nor;
+import simulator.gates.combinational.Not;
 import simulator.gates.combinational.Or;
 import simulator.network.Link;
 import simulator.wrapper.Wrapper;
@@ -46,16 +47,16 @@ public class ALU extends Wrapper{
         for(int i = 4; i< 36 ; i++){
             adder.addInput(getInput(i));
             sub.addInput(getInput(i));
-            and[i] = new And("and", getInput(i));
-            or[i] = new Or("or", getInput(i));
-            nor[i] = new Nor("nor", getInput(i));
+            and[i - 4] = new And("and", getInput(i));
+            or[i - 4] = new Or("or", getInput(i));
+            nor[i - 4] = new Nor("nor", getInput(i));
         }
         for(int i = 36; i < 68; i++){
             adder.addInput(getInput(i));
             sub.addInput(getInput(i));
-            and[i].addInput(getInput(i));
-            or[i].addInput(getInput(i));
-            nor[i].addInput(getInput(i));
+            and[i - 36].addInput(getInput(i));
+            or[i - 36].addInput(getInput(i));
+            nor[i - 36].addInput(getInput(i));
         }
         
         And and_adder[] = new And[32];
@@ -103,7 +104,8 @@ public class ALU extends Wrapper{
             or_zero.addInput(outputOr[i].getOutput(0));
         }
 
-        addOutput(or_zero.getOutput(0)); // zero flag
+        Not not_zero = new Not("not", or_zero.getOutput(0));
+        addOutput(not_zero.getOutput(0)); // zero flag
 
         for(int i = 0; i< 32; i++){
             addOutput(outputOr[i].getOutput(0)); // data
