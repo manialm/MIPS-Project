@@ -90,36 +90,36 @@ public class test {
         // sub.addInput(Simulator.trueLogic);
         // sub.addInput(Simulator.falseLogic);
         
-        ALU alu = new ALU("alu", "68x33");
-        //control singals
-        alu.addInput(Simulator.trueLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.trueLogic);
-        alu.addInput(Simulator.falseLogic);
-        //a 32-bit 68
-        for(int i = 0; i < 25; i++){
-            alu.addInput(Simulator.falseLogic);
-        }
-        alu.addInput(Simulator.trueLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.trueLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.falseLogic);
-        //a 32-bit 33
-        for(int i = 0; i< 26; i++){
-            alu.addInput(Simulator.falseLogic);
-        }
-        alu.addInput(Simulator.trueLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.falseLogic);
-        alu.addInput(Simulator.trueLogic);
+        // ALU alu = new ALU("alu", "68x33");
+        // //control singals
+        // alu.addInput(Simulator.trueLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.trueLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // //a 32-bit 68
+        // for(int i = 0; i < 25; i++){
+        //     alu.addInput(Simulator.falseLogic);
+        // }
+        // alu.addInput(Simulator.trueLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.trueLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // //a 32-bit 33
+        // for(int i = 0; i< 26; i++){
+        //     alu.addInput(Simulator.falseLogic);
+        // }
+        // alu.addInput(Simulator.trueLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.trueLogic);
 
 
-        Simulator.debugger.addTrackItem(alu);
+        Simulator.debugger.addTrackItem();
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(1);
 
