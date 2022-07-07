@@ -20,6 +20,7 @@ import simulator.wrapper.Wrapper;
  *      6 : MemWrite
  *      7 : ALUSrc
  *      8 : RegWrite
+ *      9 : Imm
  */
 
  // all don't care states are assumed as 0
@@ -110,6 +111,13 @@ public class Control extends Wrapper{
         // loads, r-format
         Or or_regwrite = new Or("or", not_load.getOutput(0), not_rformat.getOutput(0));
         addOutput(or_regwrite.getOutput(0));
+
+        //Imm
+        Not not_input8 = new Not("not", getInput(0));
+        Not not_input9 = new Not("not", getInput(1));
+        And and_imm = new And("and", getInput(2));
+        and_imm.addInput(not_input8.getOutput(0), not_input9.getOutput(0));
+        addOutput(and_imm.getOutput(0));
     }
     
 }

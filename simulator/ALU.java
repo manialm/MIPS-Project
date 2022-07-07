@@ -20,7 +20,7 @@ import simulator.wrapper.wrappers.Decoder;
  */
 
  /*control singals:
-  *     adder = 10  
+  *     add = 10  
   *     sub = 6
   *     and = 0
   *     or = 1
