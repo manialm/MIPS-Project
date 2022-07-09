@@ -10,6 +10,9 @@ import simulator.wrapper.wrappers.Adder;
  *  in:
  *      0 : clock
  *      1 -> 33 : data
+ * 
+ * out:
+ *   0 -> 31 : register output (address)
  */
 
 public class PC extends Wrapper {

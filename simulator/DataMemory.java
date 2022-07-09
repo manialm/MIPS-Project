@@ -6,7 +6,8 @@ import simulator.wrapper.Wrapper;
 /* instruction memory
  * (constructor takes a ByteMemory object)
  * in:
- *   0 -> 31 : read address (PC)
+ *   0 -> 31 : read address
+ *   32 -> 63 : write data
  * 
  * out: (0 -> 31 : instruction)
  * 
@@ -16,11 +17,11 @@ import simulator.wrapper.Wrapper;
  *   21 -> 25 : rs
  */
 
-public class InstructionMemory extends Wrapper {
+public class DataMemory extends Wrapper {
     
     private ByteMemory memory;
     
-    public InstructionMemory(String label, String stream, ByteMemory memory, Link... links) {
+    public DataMemory(String label, String stream, ByteMemory memory, Link... links) {
         super(label, stream, links);
         this.memory = memory;
         initialize();
@@ -36,6 +37,10 @@ public class InstructionMemory extends Wrapper {
         for (int i = 0; i < 16; i++) {
             // get the 16 most signifcant bits of PC for address
             memory.addInput(getInput(i + 16));
+        }
+
+        for (int i = 0; i < 32; i++) {
+            memory.addInput(getInput(i + 32));
         }
 
         for (int i = 0; i < 32; i++) {

@@ -2,6 +2,7 @@ package simulator;
 
 
 import simulator.control.Simulator;
+import simulator.gates.combinational.ByteMemory;
 import simulator.gates.combinational.Not;
 import simulator.gates.sequential.BigClock;
 import simulator.gates.sequential.Clock;
@@ -118,12 +119,72 @@ public class test {
         // alu.addInput(Simulator.falseLogic);
         // alu.addInput(Simulator.trueLogic);
 
+        // Begin InstructionMemory
+        // BigClock clock = new BigClock("clk");
+        // PC pc = new PC("pc", "1x32", clock.getOutput(0));
+
+        // // never writes
+        // ByteMemory memory = new ByteMemory("memory", Simulator.falseLogic);
+        
+        // Boolean[][] mem = new Boolean[65536][8];
+        // for (int i = 0; i < 65536; i++) {
+        //     for (int j = 0; j < 8; j++) {
+        //         mem[i][j] = false;
+        //     }
+        // }
+
+        // mem[0][0] = true;
+        // mem[0][1] = true;
+
+        // mem[4][0] = true;
+        // mem[4][2] = true;
+        // memory.setMemory(mem);
+
+        // InstructionMemory instructionMemory = new InstructionMemory("ins_mem", "32x32", memory);
+
+        // for (int i = 0; i < 32; i++) {
+        //     instructionMemory.addInput(pc.getOutput(i));
+        // }
+        // End InstructionMemory
+
+        
+        // Begin DataMemory
+        // BigClock clock = new BigClock("clk");
+        // PC pc = new PC("pc", "1x32", clock.getOutput(0));
+
+        // // does write
+        // ByteMemory memory = new ByteMemory("memory", Simulator.trueLogic);
+        
+        // Boolean[][] mem = new Boolean[65536][8];
+        // for (int i = 0; i < 65536; i++) {
+        //     for (int j = 0; j < 8; j++) {
+        //         mem[i][j] = false;
+        //     }
+        // }
+
+        // mem[0][0] = true;
+        // mem[0][3] = true;
+        // memory.setMemory(mem);
+
+        // DataMemory dataMemory = new DataMemory("data_mem", "64x32", memory);
+
+        // for (int i = 0; i < 32; i++) {
+        //     dataMemory.addInput(Simulator.falseLogic);
+        // }
+
+        // for (int i = 0; i < 32; i += 2) {
+        //     dataMemory.addInput(Simulator.trueLogic);
+        //     dataMemory.addInput(Simulator.falseLogic);
+        // }
+        
+        // clock.toggle();
+        // Simulator.debugger.addTrackItem(clock, memory);
+        // Simulator.debugger.setDelay(0);
+        // Simulator.circuit.startCircuit(3);
+        // End DataMemory
 
         Simulator.debugger.addTrackItem();
         Simulator.debugger.setDelay(0);
-        Simulator.circuit.startCircuit(1);
-
-
-
+        Simulator.circuit.startCircuit(3);
     }
 }
