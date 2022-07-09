@@ -20,7 +20,8 @@ import simulator.wrapper.Wrapper;
  *      6 : MemWrite
  *      7 : ALUSrc
  *      8 : RegWrite
- *      9 : Imm
+ *      9 : Jump
+ *      10 : Imm
  */
 
  // all don't care states are assumed as 0
@@ -92,15 +93,15 @@ public class Control extends Wrapper {
         And and_write = new And("and", not_secondbit.getOutput(0));
         and_write.addInput(getInput(0));
         and_write.addInput(getInput(2));
-        addOutput(and_write.getInput(0));
+        addOutput(and_write.getOutput(0));
 
         // AluSrc
         // loads, stors : 1
         // immediates => first 3 bits = 001
         Not not_thirdbit = new Not("not", getInput(2));
         Or or_imm = new Or("or", not_thirdbit.getOutput(0));
-        or_imm.getInput(0);
-        or_imm.getInput(1);
+        or_imm.addInput(getInput(0));
+        or_imm.addInput(getInput(1));
         Not not_imm = new Not("not", or_imm.getOutput(0));
         Or or_alusrc = new Or("or", not_imm.getOutput(0));
         or_alusrc.addInput(and_write.getOutput(0));
@@ -111,6 +112,19 @@ public class Control extends Wrapper {
         // loads, r-format
         Or or_regwrite = new Or("or", not_load.getOutput(0), not_rformat.getOutput(0));
         addOutput(or_regwrite.getOutput(0));
+
+        // Jump
+        // j = 000010
+        // jal = 000011
+        Not not_input5 = new Not("not", getInput(4));
+        Not not_input6 = new Not("not", getInput(5));
+        Or or_j = new Or("or", not_input5.getOutput(0));
+        for(int i = 0; i < 4; i++){
+            or_j.addInput(getInput(i));
+        }
+        Not not_jump = new Not("not", or_j.getOutput(0));
+        addOutput(not_jump.getOutput(0));
+        
 
         //Imm
         Not not_input8 = new Not("not", getInput(0));

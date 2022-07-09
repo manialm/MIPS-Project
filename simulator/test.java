@@ -185,54 +185,58 @@ public class test {
         // End DataMemory
 
         
-        AluControl cont = new AluControl("cont", "12x4");
-        //aluop
-        cont.addInput(Simulator.trueLogic);
-        cont.addInput(Simulator.falseLogic);
-        //func
-        cont.addInput(Simulator.trueLogic);
-        for(int i = 0; i< 2; i++){
-            cont.addInput(Simulator.falseLogic);
+        // AluControl cont = new AluControl("cont", "12x4");
+        // //aluop
+        // cont.addInput(Simulator.trueLogic);
+        // cont.addInput(Simulator.falseLogic);
+        // //func
+        // cont.addInput(Simulator.trueLogic);
+        // for(int i = 0; i< 2; i++){
+        //     cont.addInput(Simulator.falseLogic);
 
-        }
-        cont.addInput(Simulator.trueLogic);
-        cont.addInput(Simulator.falseLogic);
-        cont.addInput(Simulator.trueLogic);
+        // }
+        // cont.addInput(Simulator.trueLogic);
+        // cont.addInput(Simulator.falseLogic);
+        // cont.addInput(Simulator.trueLogic);
         
-        //imm
-        cont.addInput(Simulator.falseLogic);
-        //opcode
-        cont.addInput(Simulator.trueLogic);
-        for(int i = 0; i < 2; i++){
-            cont.addInput(Simulator.falseLogic);
-        }
+        // //imm
+        // cont.addInput(Simulator.falseLogic);
+        // //opcode
+        // cont.addInput(Simulator.trueLogic);
+        // for(int i = 0; i < 2; i++){
+        //     cont.addInput(Simulator.falseLogic);
+        // }
 
+        // ALU alu = new ALU("alu", "68x33");
 
+        // for(int i =0; i < 4; i++){
+        //     alu.addInput(cont.getOutput(i));
+        // }
 
-        ALU alu = new ALU("alu", "68x33");
-
-        for(int i =0; i < 4; i++){
-            alu.addInput(cont.getOutput(i));
-        }
-
+        // //2
+        // for(int i = 0; i < 30; i++){
+        //     alu.addInput(Simulator.falseLogic);
+        // }
         // alu.addInput(Simulator.trueLogic);
         // alu.addInput(Simulator.falseLogic);
+        // //3
+        // for(int i = 0; i < 30; i++){
+        //     alu.addInput(Simulator.falseLogic);
+        // }
         // alu.addInput(Simulator.trueLogic);
-        // alu.addInput(Simulator.falseLogic);
-        //2
-        for(int i = 0; i < 30; i++){
-            alu.addInput(Simulator.falseLogic);
-        }
-        alu.addInput(Simulator.trueLogic);
-        alu.addInput(Simulator.falseLogic);
-        //3
-        for(int i = 0; i < 30; i++){
-            alu.addInput(Simulator.falseLogic);
-        }
-        alu.addInput(Simulator.trueLogic);
-        alu.addInput(Simulator.trueLogic);
+        // alu.addInput(Simulator.trueLogic);
 
-        Simulator.debugger.addTrackItem(alu);
+
+
+        Control control = new Control("control", "6x10");
+        control.addInput(Simulator.falseLogic);
+        control.addInput(Simulator.falseLogic);
+        control.addInput(Simulator.falseLogic);
+        control.addInput(Simulator.trueLogic);
+        control.addInput(Simulator.falseLogic);
+        control.addInput(Simulator.falseLogic);
+
+        Simulator.debugger.addTrackItem(control);
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(3);
     }
