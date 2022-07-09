@@ -4,6 +4,7 @@ package simulator;
 import simulator.control.Simulator;
 import simulator.gates.combinational.ByteMemory;
 import simulator.gates.combinational.Not;
+import simulator.gates.combinational.Or;
 import simulator.gates.sequential.BigClock;
 import simulator.gates.sequential.Clock;
 import simulator.wrapper.wrappers.Adder;
@@ -183,7 +184,55 @@ public class test {
         // Simulator.circuit.startCircuit(3);
         // End DataMemory
 
-        Simulator.debugger.addTrackItem();
+        
+        AluControl cont = new AluControl("cont", "12x4");
+        //aluop
+        cont.addInput(Simulator.trueLogic);
+        cont.addInput(Simulator.falseLogic);
+        //func
+        cont.addInput(Simulator.trueLogic);
+        for(int i = 0; i< 2; i++){
+            cont.addInput(Simulator.falseLogic);
+
+        }
+        cont.addInput(Simulator.trueLogic);
+        cont.addInput(Simulator.falseLogic);
+        cont.addInput(Simulator.trueLogic);
+        
+        //imm
+        cont.addInput(Simulator.falseLogic);
+        //opcode
+        cont.addInput(Simulator.trueLogic);
+        for(int i = 0; i < 2; i++){
+            cont.addInput(Simulator.falseLogic);
+        }
+
+
+
+        ALU alu = new ALU("alu", "68x33");
+
+        for(int i =0; i < 4; i++){
+            alu.addInput(cont.getOutput(i));
+        }
+
+        // alu.addInput(Simulator.trueLogic);
+        // alu.addInput(Simulator.falseLogic);
+        // alu.addInput(Simulator.trueLogic);
+        // alu.addInput(Simulator.falseLogic);
+        //2
+        for(int i = 0; i < 30; i++){
+            alu.addInput(Simulator.falseLogic);
+        }
+        alu.addInput(Simulator.trueLogic);
+        alu.addInput(Simulator.falseLogic);
+        //3
+        for(int i = 0; i < 30; i++){
+            alu.addInput(Simulator.falseLogic);
+        }
+        alu.addInput(Simulator.trueLogic);
+        alu.addInput(Simulator.trueLogic);
+
+        Simulator.debugger.addTrackItem(alu);
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(3);
     }

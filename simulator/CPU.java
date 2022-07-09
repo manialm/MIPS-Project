@@ -87,7 +87,7 @@ public class CPU {
 
 
         // ALU Control:
-        aluControl = new AluControl("aluControl", "10x4");
+       // aluControl = new AluControl("aluControl");
 
         // aluControl: AluOp0, AluOp1
         // CHECK: Order of AluOps
@@ -108,7 +108,7 @@ public class CPU {
 
                             
         // Sign Extend:
-        signExtend = new SignExtend("signExtend", stream, links)
+        //signExtend = new SignExtend("signExtend", stream, links)
 
         // ALU:
         alu = new ALU("alu", "68x33");
