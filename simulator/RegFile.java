@@ -16,6 +16,10 @@ import simulator.wrapper.wrappers.Multiplexer;
  *      7 -> 11 : read register 2
  *      12 -> 16 : write register
  *      17 -> 48 : write data
+ * 
+ * out:
+ *      0 -> 31 : Read Data 1
+ *      32 -> 63 : Read Data 2
  */
 public class RegFile extends Wrapper {
     static final int size = 32;
