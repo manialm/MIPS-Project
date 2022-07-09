@@ -25,9 +25,9 @@ import simulator.wrapper.Wrapper;
 
  // all don't care states are assumed as 0
 
-public class Control extends Wrapper{
+public class Control extends Wrapper {
 
-    public Control(String label, String stream, Link[] links) {
+    public Control(String label, String stream, Link... links) {
         super(label, stream, links);
     }
 

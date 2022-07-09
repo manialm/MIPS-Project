@@ -30,7 +30,7 @@ import simulator.wrapper.Wrapper;
  
 public class AluControl extends Wrapper{
 
-    public AluControl(String label, String stream, Link[] links) {
+    public AluControl(String label, String stream, Link... links) {
         super(label, stream, links);
     }
 
