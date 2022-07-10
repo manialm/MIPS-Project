@@ -228,16 +228,20 @@ public class test {
 
 
 
-        Control control = new Control("control", "6x10");
-        control.addInput(Simulator.falseLogic);
-        control.addInput(Simulator.falseLogic);
-        control.addInput(Simulator.falseLogic);
-        control.addInput(Simulator.trueLogic);
-        control.addInput(Simulator.falseLogic);
-        control.addInput(Simulator.falseLogic);
+        // Control control = new Control("control", "6x10");
+        // control.addInput(Simulator.falseLogic);
+        // control.addInput(Simulator.falseLogic);
+        // control.addInput(Simulator.falseLogic);
+        // control.addInput(Simulator.trueLogic);
+        // control.addInput(Simulator.falseLogic);
+        // control.addInput(Simulator.falseLogic);
 
-        Simulator.debugger.addTrackItem(control);
-        Simulator.debugger.setDelay(0);
-        Simulator.circuit.startCircuit(3);
+        CPU cpu = new CPU();
+
+        // 32 * 0 must become a nop
+        
+        Simulator.debugger.addTrackItem(cpu.instructionMemory, cpu.regFile);
+        Simulator.debugger.setDelay(200);
+        Simulator.circuit.startCircuit(8);
     }
 }

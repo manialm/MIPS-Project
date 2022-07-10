@@ -117,7 +117,6 @@ public class Control extends Wrapper {
         // j = 000010
         // jal = 000011
         Not not_input5 = new Not("not", getInput(4));
-        Not not_input6 = new Not("not", getInput(5));
         Or or_j = new Or("or", not_input5.getOutput(0));
         for(int i = 0; i < 4; i++){
             or_j.addInput(getInput(i));

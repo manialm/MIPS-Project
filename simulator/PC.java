@@ -28,6 +28,7 @@ public class PC extends Wrapper {
         for(int i = 0; i< 32; i++){
             adder.addInput(reg.getOutput(i));
         }
+
         for(int i = 0; i < 29; i++){
             adder.addInput(Simulator.falseLogic);
         }

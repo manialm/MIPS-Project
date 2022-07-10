@@ -1,20 +1,20 @@
 package simulator;
+import java.lang.reflect.Member;
+
 import simulator.gates.combinational.ByteMemory;
 import simulator.network.Link;
 import simulator.wrapper.Wrapper;
 
 /* instruction memory
  * (constructor takes a ByteMemory object)
- * in:
- *   0 -> 31 : read address
- *   32 -> 63 : write data
+ *  in:
+ *      0 : MemWrite
+ *      1 : MemRead
+ *      2 -> 33 : read address
+ *      34 -> 65 : write data
  * 
- * out: (0 -> 31 : instruction)
- * 
- *   0 -> 15 : immediate for I-type, last 6 bits are func for R-type
- *   11 -> 15 : rd
- *   16 -> 20 : rt
- *   21 -> 25 : rs
+ *  out:
+ *      0 -> 31 : data
  */
 
 public class DataMemory extends Wrapper {
@@ -34,18 +34,21 @@ public class DataMemory extends Wrapper {
             return;
         }
 
-        for (int i = 0; i < 16; i++) {
-            // get the 16 most signifcant bits of PC for address
-            memory.addInput(getInput(i + 16));
+        // write signal
+        memory.addInput(getInput(0));
+
+        for(int i = 18; i< 34; i++){
+            memory.addInput(getInput(i));
         }
 
-        for (int i = 0; i < 32; i++) {
-            memory.addInput(getInput(i + 32));
+        for(int i = 34; i < 66 ; i++){
+            memory.addInput(getInput(i));
         }
 
-        for (int i = 0; i < 32; i++) {
+        for(int i =0 ; i< 32; i++){
             addOutput(memory.getOutput(i));
         }
+
     }
     
 }
