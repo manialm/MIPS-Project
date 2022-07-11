@@ -1,6 +1,5 @@
 package simulator;
 
-import simulator.control.Simulator;
 import simulator.gates.combinational.And;
 import simulator.gates.combinational.Not;
 import simulator.gates.combinational.Or;
