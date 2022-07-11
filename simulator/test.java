@@ -238,8 +238,6 @@ public class test {
 
         CPU cpu = new CPU();
 
-        // 32 * 0 must become a nop
-        
         Simulator.debugger.addTrackItem(cpu.clock, cpu.pc, cpu.instructionMemory, cpu.regFile);
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(8);
