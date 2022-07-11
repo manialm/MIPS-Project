@@ -36,6 +36,7 @@ public class CPU {
                 mem[i][j] = false;
             }
         }
+        pc = new Register("pc", "34x32", clock.getOutput(0), Simulator.trueLogic);
 
         // write code to memory here ****************************************************************
         // lw $s0, 0($0)
@@ -62,6 +63,8 @@ public class CPU {
         for (int i = 0; i < 32; i++) {
             instructionMemory.addInput(pc.getOutput(i));
         }
+
+       
 
         // Control unit:
         control = new Control("control", "6x11");
@@ -182,7 +185,6 @@ public class CPU {
         }
 
         // PC:
-        pc = new Register("pc", "34x32", clock.getOutput(0), Simulator.trueLogic);
         Adder pc_adder = new Adder("pc_adder", "64x33");
         for(int i = 0; i< 32; i++){
             pc_adder.addInput(pc.getOutput(i));

@@ -15,8 +15,8 @@ public class ShL2 extends Wrapper{
         for(int i = 2; i< 32; i++){
             addOutput(getInput(i));
         }
-        addInput(Simulator.falseLogic);
-        addInput(Simulator.falseLogic);
+        addOutput(Simulator.falseLogic);
+        addOutput(Simulator.falseLogic);
     }
     
 }
