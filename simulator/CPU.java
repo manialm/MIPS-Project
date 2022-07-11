@@ -39,23 +39,23 @@ public class CPU {
         pc = new Register("pc", "34x32", clock.getOutput(0), Simulator.trueLogic);
 
         // write code to memory here ****************************************************************
-        // lw $s0, 0($0)
-        mem[0][0] = true;
-        mem[0][4] = true;
-        mem[0][5] = true;
+        // // lw $s0, 0($0)
+        // mem[0][0] = true;
+        // mem[0][4] = true;
+        // mem[0][5] = true;
 
-        // lw $s1, 0($0)
-        mem[4][0] = true;
-        mem[4][4] = true;
-        mem[4][5] = true;
-        mem[5][7] = true;
+        // // lw $s1, 0($0)
+        // mem[4][0] = true;
+        // mem[4][4] = true;
+        // mem[4][5] = true;
+        // mem[5][7] = true;
 
-        // nor $0, $0, $1
-        mem[9][7] = true;
-        mem[11][2] = true;
-        mem[11][5] = true;
-        mem[11][6] = true;
-        mem[11][7] = true;
+        // // nor $0, $0, $1
+        // mem[9][7] = true;
+        // mem[11][2] = true;
+        // mem[11][5] = true;
+        // mem[11][6] = true;
+        // mem[11][7] = true;
         memoryInst.setMemory(mem);
 
         instructionMemory = new InstructionMemory("ins_mem", "32x32", memoryInst);

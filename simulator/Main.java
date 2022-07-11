@@ -11,7 +11,7 @@ import simulator.wrapper.wrappers.Adder;
 import simulator.wrapper.wrappers.DFlipFlop;
 import simulator.wrapper.wrappers.Decoder;
 
-public class test {
+public class Main {
     public static void main(String[] args){
         // BigClock clock = new BigClock("clk");
         // DFlipFlop[] counter = new DFlipFlop[3];
@@ -236,28 +236,27 @@ public class test {
         // control.addInput(Simulator.falseLogic);
         // control.addInput(Simulator.falseLogic);
 
-        ShiftLeft shift = new ShiftLeft("shift", "37x32");
+        // ShiftLeft shift = new ShiftLeft("shift", "37x32");
 
-        // shift left by 10
-        shift.addInput(Simulator.falseLogic);
-        shift.addInput(Simulator.trueLogic);
-        shift.addInput(Simulator.falseLogic);
-        shift.addInput(Simulator.trueLogic);
-        shift.addInput(Simulator.falseLogic);
+        // // shift left by 10
+        // shift.addInput(Simulator.falseLogic);
+        // shift.addInput(Simulator.trueLogic);
+        // shift.addInput(Simulator.falseLogic);
+        // shift.addInput(Simulator.trueLogic);
+        // shift.addInput(Simulator.falseLogic);
         
-        for (int i = 0; i < 16; i++) {
-            shift.addInput(Simulator.trueLogic);
-        }
+        // for (int i = 0; i < 16; i++) {
+        //     shift.addInput(Simulator.trueLogic);
+        // }
 
-        for (int i = 0; i < 16; i++) {
-            shift.addInput(Simulator.falseLogic);
-        }
+        // for (int i = 0; i < 16; i++) {
+        //     shift.addInput(Simulator.falseLogic);
+        // }
         
-        // CPU cpu = new CPU();
+        //CPU cpu = new CPU();
 
-        // Simulator.debugger.addTrackItem(cpu.instructionMemory, cpu.regFile);
-        Simulator.debugger.addTrackItem(shift);
+        Simulator.debugger.addTrackItem();
         Simulator.debugger.setDelay(0);
-        Simulator.circuit.startCircuit(8);
+        Simulator.circuit.startCircuit();
     }
 }

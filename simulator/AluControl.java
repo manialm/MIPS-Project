@@ -98,9 +98,19 @@ public class AluControl extends Wrapper{
             buffer_srl[i] = new Buffer("buffer", Simulator.trueLogic);
         }
 
-        // 6 instruction * 4 link = 24
-        And and_rformat[] = new And[24];
-        for(int i =0; i< 24; i++){
+        //sll : 0xx000 => 1101
+        Or or_sll = new Or("or", getInput(2), getInput(5), getInput(6), getInput(7));
+        Not not_sll = new Not("not", or_sll.getOutput(0));
+        Buffer buffer_sll[] = new Buffer[4];
+        buffer_sll[0] = new Buffer("buffer", Simulator.trueLogic);
+        buffer_sll[1] = new Buffer("buffer", Simulator.trueLogic);
+        buffer_sll[2] = new Buffer("buffer", Simulator.trueLogic);
+        buffer_sll[3] = new Buffer("buffer", Simulator.trueLogic);
+
+
+        // 7 instruction * 4 link = 28
+        And and_rformat[] = new And[28];
+        for(int i =0; i< 28; i++){
             and_rformat[i] = new And("and");
         }
         /*
@@ -111,6 +121,7 @@ public class AluControl extends Wrapper{
          *  12 -> 15: add
          *  16 -> 19: sub
          *  20 -> 23: srl
+         *  24 -> 28: sll
          */
         int index = 0;
         for(int i = 0; i < 4; i++){
@@ -142,6 +153,11 @@ public class AluControl extends Wrapper{
             and_rformat[i].addInput(not_srl.getOutput(0), buffer_srl[index].getOutput(0));
             index++;
         }
+        index = 0;
+        for(int i = 24; i < 28; i++){
+            and_rformat[i].addInput(not_sll.getOutput(0), buffer_sll[index].getOutput(0));
+            index++;
+        }
 
         Or or_rformat[] = new Or[4];
         for(int i = 0; i < 4; i++){
@@ -154,6 +170,7 @@ public class AluControl extends Wrapper{
             or_rformat[i].addInput(and_rformat[i + 12].getOutput(0));   // add
             or_rformat[i].addInput(and_rformat[i + 16].getOutput(0));   // sub
             or_rformat[i].addInput(and_rformat[i + 20].getOutput(0));   // srl
+            or_rformat[i].addInput(and_rformat[i + 24].getOutput(0));   // sll
         }
         
 
@@ -264,8 +281,7 @@ public class AluControl extends Wrapper{
         //shift signal
         Or or_shift = new Or("or");
         or_shift.addInput(not_srl.getOutput(0));
-        or_shift.addInput(Simulator.falseLogic);// delete it later
-        //or_shift.addInput(not_sll.getOutput(0));
+        or_shift.addInput(not_sll.getOutput(0));
         addOutput(or_shift.getOutput(0));
     }
     

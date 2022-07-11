@@ -38,9 +38,31 @@ public class Debugger {
     public void printState() {
         if (!trackList.isEmpty()) {
             for (Linkable linkable : trackList) {
+                /*start adding      *******************************************/
+                String toPrint = linkable.getLabel() + "[" + linkable.getId() + "]" + ": ";
+                /* end              *******************************************/
                 System.out.print(linkable.getLabel() + "[" + linkable.getId() + "]" + ": ");
+                /*start adding      *******************************************/
+                int counter = 0;
+                /*end               *******************************************/
                 for (Link link : linkable.getOutputs()) {
-                    System.out.print(link.getSignal() + " ");
+                    // System.out.print(link.getSignal() + " ");
+                    /*start adding  *******************************************/
+                    if(link.getSignal()){
+                        System.out.print(1 + " ");
+                    }else{
+                        System.out.print(0 + " ");
+                    }
+                    counter++;
+                    if(counter > 31){
+                        System.out.println();
+                        int size = toPrint.length();
+                        for(int i = 0; i < size; i++){
+                            System.out.print(" ");
+                        }
+                        counter = 0;
+                    }
+                    /*end           *******************************************/
                 }
                 System.out.println();
             }
