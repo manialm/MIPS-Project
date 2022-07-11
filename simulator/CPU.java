@@ -102,7 +102,7 @@ public class CPU {
 
 
         //ALU Control:
-        aluControl = new AluControl("aluControl", "12x4");
+        aluControl = new AluControl("aluControl", "12x5");
 
         // aluControl: AluOp1, AluOp0
         aluControl.addInput(control.getOutput(4), control.getOutput(5));
@@ -134,8 +134,18 @@ public class CPU {
             alu.addInput(aluControl.getOutput(i));
         }
 
-        for (int i = 0; i < 32; i++) {
+        Multiplexer[] ALUIn1mux = new Multiplexer[5];
+        for(int i = 0; i< 5 ; i++){
+            ALUIn1mux[i] = new Multiplexer("mux", "3x1", aluControl.getOutput(4)); // shift
+            ALUIn1mux[i].addInput(regFile.getOutput(i + 27));
+            ALUIn1mux[i].addInput(instructionMemory.getOutput(i + 21));
+        }
+
+        for (int i = 0; i < 27; i++) {
             alu.addInput(regFile.getOutput(i));
+        }
+        for(int i = 0; i< 5; i++){
+            alu.addInput(ALUIn1mux[i].getOutput(0));
         }
 
         Multiplexer[] ALUIn2mux = new Multiplexer[32];

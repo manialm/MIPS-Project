@@ -18,6 +18,7 @@ import simulator.wrapper.Wrapper;
  *      9 -> 11: 3 last bits of opcode
  *  out:
  *      0 -> 3 : control signals
+ *      4 : shift signal
  */
 
 /*
@@ -38,18 +39,18 @@ public class AluControl extends Wrapper{
 
     @Override
     public void initialize() {
-        //and : xxx100 => 0000
+        //and : 1xx100 => 0000
         Not not_input6 = new Not("not", getInput(6));
         Not not_input7 = new Not("not", getInput(7));
         And and_and = new And("and", getInput(5));
-        and_and.addInput(not_input6.getOutput(0), not_input7.getOutput(0));
+        and_and.addInput(not_input6.getOutput(0), not_input7.getOutput(0), getInput(2));
         Buffer buffer_and[] = new Buffer[4];
         for(int i =0 ; i < 4; i++){
             buffer_and[i] = new Buffer("buffer", Simulator.falseLogic);
         }
 
-        //or : xxx101 => 0001
-        And and_or = new And("and", getInput(5), getInput(7));
+        //or : 1xx101 => 0001
+        And and_or = new And("and", getInput(5), getInput(7), getInput(2));
         and_or.addInput(not_input6.getOutput(0));
         Buffer buffer_or[] = new Buffer[4];
         for(int i = 0; i < 3; i++){
@@ -57,8 +58,8 @@ public class AluControl extends Wrapper{
         }
         buffer_or[3] = new Buffer("buffer",Simulator.trueLogic);
 
-        //nor : xxx111 => 1100
-        And and_nor = new And("and", getInput(5), getInput(6), getInput(7));
+        //nor : 1xx111 => 1100
+        And and_nor = new And("and", getInput(5), getInput(6), getInput(7), getInput(2));
         Buffer buffer_nor[] = new Buffer[4];
         for(int i = 0; i < 2; i++){
             buffer_nor[i] = new Buffer("buffer", Simulator.trueLogic);
@@ -67,19 +68,19 @@ public class AluControl extends Wrapper{
             buffer_nor[i] = new Buffer("buffer", Simulator.falseLogic);
         }
 
-        //add : xxx000 => 1010
-        Or or_add = new Or("or", getInput(5), getInput(6), getInput(7));
+        //add : 1xx000 => 1010
+        Not not_input2 = new Not("not", getInput(2));
+        Or or_add = new Or("or", getInput(5), getInput(6), getInput(7), not_input2.getOutput(0));
         Not not_add = new Not("not", or_add.getOutput(0));
-
         Buffer buffer_add[] = new Buffer[4];
         buffer_add[0] = new Buffer("buffer", Simulator.trueLogic);
         buffer_add[1] = new Buffer("buffer", Simulator.falseLogic);
         buffer_add[2] = new Buffer("buffer", Simulator.trueLogic);
         buffer_add[3] = new Buffer("buffer", Simulator.falseLogic);
 
-        //sub : xxx010 => 0110
+        //sub : 1xx010 => 0110
         Not not_input5 = new Not("not", getInput(5));
-        And and_sub = new And("and", getInput(6));
+        And and_sub = new And("and", getInput(6), getInput(2));
         and_sub.addInput(not_input5.getOutput(0));
         and_sub.addInput(not_input7.getOutput(0));
         Buffer buffer_sub[] = new Buffer[4];
@@ -88,9 +89,18 @@ public class AluControl extends Wrapper{
         buffer_sub[2] = new Buffer("buffer",Simulator.trueLogic);
         buffer_sub[3] = new Buffer("buffer",Simulator.falseLogic);
 
-        // 5 instruction * 4 link = 20
-        And and_rformat[] = new And[20];
-        for(int i =0; i< 20; i++){
+        //srl : 0xx010 => 1111
+        Or or_srl = new Or("or", getInput(2),getInput(5), getInput(7));
+        or_srl.addInput(not_input6.getOutput(0));
+        Not not_srl = new Not("not", or_srl.getOutput(0));
+        Buffer buffer_srl[] = new Buffer[4];
+        for(int i = 0; i< 4; i++){
+            buffer_srl[i] = new Buffer("buffer", Simulator.trueLogic);
+        }
+
+        // 6 instruction * 4 link = 24
+        And and_rformat[] = new And[24];
+        for(int i =0; i< 24; i++){
             and_rformat[i] = new And("and");
         }
         /*
@@ -100,6 +110,7 @@ public class AluControl extends Wrapper{
          *  8 -> 11 : nor
          *  12 -> 15: add
          *  16 -> 19: sub
+         *  20 -> 23: srl
          */
         int index = 0;
         for(int i = 0; i < 4; i++){
@@ -126,6 +137,11 @@ public class AluControl extends Wrapper{
             and_rformat[i].addInput(and_sub.getOutput(0), buffer_sub[index].getOutput(0));
             index++;
         }
+        index = 0;
+        for(int i = 20; i < 24; i++){
+            and_rformat[i].addInput(not_srl.getOutput(0), buffer_srl[index].getOutput(0));
+            index++;
+        }
 
         Or or_rformat[] = new Or[4];
         for(int i = 0; i < 4; i++){
@@ -137,6 +153,7 @@ public class AluControl extends Wrapper{
             or_rformat[i].addInput(and_rformat[i + 8].getOutput(0));    // nor
             or_rformat[i].addInput(and_rformat[i + 12].getOutput(0));   // add
             or_rformat[i].addInput(and_rformat[i + 16].getOutput(0));   // sub
+            or_rformat[i].addInput(and_rformat[i + 20].getOutput(0));   // srl
         }
         
 
@@ -244,8 +261,12 @@ public class AluControl extends Wrapper{
         for(int i = 0; i< 4; i++){
             addOutput(or_final[i].getOutput(0));
         }
-
-
+        //shift signal
+        Or or_shift = new Or("or");
+        or_shift.addInput(not_srl.getOutput(0));
+        or_shift.addInput(Simulator.falseLogic);// delete it later
+        //or_shift.addInput(not_sll.getOutput(0));
+        addOutput(or_shift.getOutput(0));
     }
     
 }
