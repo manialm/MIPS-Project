@@ -7,7 +7,7 @@ import simulator.wrapper.Wrapper;
 import simulator.wrapper.wrappers.Decoder;
 import simulator.wrapper.wrappers.Multiplexer;
 
-/* shift right logical
+/* shift left logical
  * in:
  *      0 -> 4 : shift amount
  *      5 -> 36 : input
@@ -16,9 +16,9 @@ import simulator.wrapper.wrappers.Multiplexer;
  *      0 -> 31 : shifted input
  */
 
-public class ShiftRight extends Wrapper {
+public class ShiftLeft extends Wrapper {
 
-    public ShiftRight(String label, String stream, Link... links) {
+    public ShiftLeft(String label, String stream, Link... links) {
         super(label, stream, links);
     }
 
@@ -39,6 +39,8 @@ public class ShiftRight extends Wrapper {
             for (int j = 0; j < 32; j++) {
                 int sel = i - j;
                 if (sel < 0) sel += 32;
+                sel = 32 - sel;
+                if (sel == 32) sel = 0;
 
                 mux[j] = new Multiplexer("mux"+j, "3x1",
                 decoder.getOutput(sel),
@@ -48,7 +50,7 @@ public class ShiftRight extends Wrapper {
 
 
             for (int j = 0; j < 32; j++) {
-                if (!(i < j))
+                if (i <= j)
                     or[i].addInput(mux[j].getOutput(0));
             }
         }
@@ -58,5 +60,4 @@ public class ShiftRight extends Wrapper {
         }
         
     }
-    
 }

@@ -236,26 +236,27 @@ public class test {
         // control.addInput(Simulator.falseLogic);
         // control.addInput(Simulator.falseLogic);
 
-        // ShiftRight shift = new ShiftRight("shift", "37x32");
+        ShiftLeft shift = new ShiftLeft("shift", "37x32");
 
-        // // shift left by 10
-        // shift.addInput(Simulator.falseLogic);
-        // shift.addInput(Simulator.trueLogic);
-        // shift.addInput(Simulator.falseLogic);
-        // shift.addInput(Simulator.trueLogic);
-        // shift.addInput(Simulator.falseLogic);
-
-        // for (int i = 0; i < 16; i++) {
-        //     shift.addInput(Simulator.falseLogic);
-        // }
+        // shift left by 10
+        shift.addInput(Simulator.falseLogic);
+        shift.addInput(Simulator.trueLogic);
+        shift.addInput(Simulator.falseLogic);
+        shift.addInput(Simulator.trueLogic);
+        shift.addInput(Simulator.falseLogic);
         
-        // for (int i = 0; i < 16; i++) {
-        //     shift.addInput(Simulator.trueLogic);
-        // }
-        
-        CPU cpu = new CPU();
+        for (int i = 0; i < 16; i++) {
+            shift.addInput(Simulator.trueLogic);
+        }
 
-        Simulator.debugger.addTrackItem(cpu.instructionMemory, cpu.regFile);
+        for (int i = 0; i < 16; i++) {
+            shift.addInput(Simulator.falseLogic);
+        }
+        
+        // CPU cpu = new CPU();
+
+        // Simulator.debugger.addTrackItem(cpu.instructionMemory, cpu.regFile);
+        Simulator.debugger.addTrackItem(shift);
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(8);
     }
