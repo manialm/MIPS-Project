@@ -236,11 +236,28 @@ public class test {
         // control.addInput(Simulator.falseLogic);
         // control.addInput(Simulator.falseLogic);
 
-        CPU cpu = new CPU();
+        // CPU cpu = new CPU();
 
         // 32 * 0 must become a nop
+
+        ShiftRight shift = new ShiftRight("shift", "37x32");
+
+        for (int i = 0; i < 16; i++) {
+            shift.addInput(Simulator.falseLogic);
+        }
         
-        Simulator.debugger.addTrackItem(cpu.clock, cpu.pc, cpu.instructionMemory, cpu.regFile);
+        for (int i = 0; i < 16; i++) {
+            shift.addInput(Simulator.trueLogic);
+        }
+
+        // shift left by 10
+        shift.addInput(Simulator.falseLogic);
+        shift.addInput(Simulator.trueLogic);
+        shift.addInput(Simulator.falseLogic);
+        shift.addInput(Simulator.trueLogic);
+        shift.addInput(Simulator.falseLogic);
+        
+        Simulator.debugger.addTrackItem(shift);
         Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(8);
     }
