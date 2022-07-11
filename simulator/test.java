@@ -240,8 +240,8 @@ public class test {
 
         // 32 * 0 must become a nop
         
-        Simulator.debugger.addTrackItem(cpu.instructionMemory, cpu.regFile);
-        Simulator.debugger.setDelay(200);
+        Simulator.debugger.addTrackItem(cpu.clock, cpu.pc, cpu.instructionMemory, cpu.regFile);
+        Simulator.debugger.setDelay(0);
         Simulator.circuit.startCircuit(8);
     }
 }

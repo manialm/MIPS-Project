@@ -50,8 +50,8 @@ public class CPU {
         mem[4][5] = true;
         mem[5][7] = true;
 
-        // nor $0, $1, $0
-        mem[9][1] = true;
+        // nor $0, $0, $1
+        mem[9][7] = true;
         mem[11][2] = true;
         mem[11][5] = true;
         mem[11][6] = true;
