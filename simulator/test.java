@@ -242,6 +242,13 @@ public class test {
 
         ShiftRight shift = new ShiftRight("shift", "37x32");
 
+        // shift left by 10
+        shift.addInput(Simulator.falseLogic);
+        shift.addInput(Simulator.trueLogic);
+        shift.addInput(Simulator.falseLogic);
+        shift.addInput(Simulator.trueLogic);
+        shift.addInput(Simulator.falseLogic);
+
         for (int i = 0; i < 16; i++) {
             shift.addInput(Simulator.falseLogic);
         }
@@ -249,13 +256,6 @@ public class test {
         for (int i = 0; i < 16; i++) {
             shift.addInput(Simulator.trueLogic);
         }
-
-        // shift left by 10
-        shift.addInput(Simulator.falseLogic);
-        shift.addInput(Simulator.trueLogic);
-        shift.addInput(Simulator.falseLogic);
-        shift.addInput(Simulator.trueLogic);
-        shift.addInput(Simulator.falseLogic);
         
         Simulator.debugger.addTrackItem(shift);
         Simulator.debugger.setDelay(0);
